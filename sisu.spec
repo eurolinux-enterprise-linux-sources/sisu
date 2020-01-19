@@ -2,7 +2,7 @@
 
 Name:           sisu
 Version:        2.3.0
-Release:        11%{?dist}
+Release:        9%{?dist}
 Summary:        Sonatype dependency injection framework
 Group:          Development/Libraries
 License:        ASL 2.0 and EPL and MIT
@@ -259,9 +259,6 @@ sed -i 's/org.sonatype.guice.plexus.lifecycles/org.codehaus.plexus/' \
 %pom_remove_plugin :maven-clean-plugin sisu-inject/containers/guice-plexus/guice-plexus-binders
 %pom_remove_plugin :maven-dependency-plugin sisu-inject/containers/guice-plexus/guice-plexus-binders
 
-# logback is not available in RHEL
-%pom_remove_dep :logback-classic
-
 %build
 %mvn_package ":{sisu,guice}-{*}" @2
 %mvn_build -s -f
@@ -303,12 +300,6 @@ sed -i 's/org.sonatype.guice.plexus.lifecycles/org.codehaus.plexus/' \
 
 
 %changelog
-* Fri Dec 27 2013 Daniel Mach <dmach@redhat.com> - 2.3.0-11
-- Mass rebuild 2013-12-27
-
-* Wed Nov 13 2013 Mikolaj Izdebski <mizdebsk@redhat.com> - 2.3.0-10
-- Remove dependency on logback-classic
-
 * Fri Jun 28 2013 Mikolaj Izdebski <mizdebsk@redhat.com> - 2.3.0-9
 - Rebuild to regenerate API documentation
 - Resolves: CVE-2013-1571
